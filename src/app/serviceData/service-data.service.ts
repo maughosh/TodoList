@@ -1,27 +1,32 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { taskDeatils } from './taskDetails';
-
+import { TaskDeatils } from './taskDetails';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ServiceDataService {
- private url= "https://jsonplaceholder.typicode.com/todos/";
-  constructor(private http:HttpClient) { }
 
-  getData(){
+  // Adding the URL in the Variable
+   url = 'https://jsonplaceholder.typicode.com/todos/';
+
+  // Declaring HTTPClient in the constructor for using HTTP method
+  constructor(private http: HttpClient) { }
+
+  // get all details get()
+  getData() {
     return this.http.get(this.url);
   }
 
-  addTask():Observable<any>{
-const header={'content-type':'application/json'};
-const body=JSON.stringify({
-  "userId":11,
-  "title":"need to eat",
-  "completed":true
-})
-return this.http.post<taskDeatils[]>(this.url,body,{'headers':header});
+  // Used post() for sending in the API and also sending body and header in the API
+  addTask(data: any): Observable<any> {
+    const header = { 'content-type': 'application/json' };
+    return this.http.post<TaskDeatils[]>(this.url, data, { headers: header });
+  }
+
+  // Used delete() to Delete Data from the API
+  deleteItem(id: number) {
+    return this.http.delete(this.url + id);
   }
 }

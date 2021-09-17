@@ -1,41 +1,57 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
-import { ServiceDataService } from '../serviceData/service-data.service';
-import { taskDeatils } from '../serviceData/taskDetails';
-
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { ServiceDataService } from "../serviceData/service-data.service";
+import labelList from "../../assets/labelList.json";
+import { NgForm } from "@angular/forms";
 
 @Component({
-  selector: 'app-task-list',
-  templateUrl: './task-list.component.html',
-  styleUrls: ['./task-list.component.css']
+  selector: "app-task-list",
+  templateUrl: "./task-list.component.html",
+  styleUrls: ["./task-list.component.css"],
 })
-
 export class TaskListComponent implements OnInit {
-   TASK= "Task";
-   LIST="List";
-  @ViewChild('table', { static: true}) table
-   ELEMENT_DATA:any = [  ];
-  displayedColumns: string[] = [ 'name','action'];
+  // taking json data from assets folder to component
+  JsonData: any = labelList;
 
-  constructor(private commonSer:ServiceDataService) { 
-    
-  }
+  @ViewChild("taskForm", { static: true }) taskForm: NgForm;
 
+  ELEMENT_DATA: any = [];
+  inputField = "";
+
+  // Initializing the ServiceDataService
+  constructor(private commonSer: ServiceDataService) {}
+
+  // Subscribing data from the api so that we can use the data in application
   ngOnInit() {
-    this.commonSer.getData().subscribe(res=>{
-      console.log(res)
-    })
+    this.fetchData();
   }
-  submit(data:any){
-    console.log(data);
-    this.commonSer.addTask().subscribe(res=>{
-      data=res.name;
-    })
-    this.ELEMENT_DATA.push({name: data});
-    this.table.renderRows() ;
-    }
 
-    delete(i:any){
-      this.ELEMENT_DATA.splice(i,1);
-      this.table.renderRows() ;
-    }
+  //fetches data from API
+  fetchData() {
+    this.commonSer.getData().subscribe((res) => {
+      this.ELEMENT_DATA = res;
+    });
+  }
+  // submit()  is used in the + button . we are doing 2 task in this method
+  submit(data: any) {
+    // Whatever the data we put in input box we are sending that as a body in api using payload()
+    const payload = {
+      userId: Math.floor(Math.random() * 10) + 1,
+      title: data,
+      completed: false,
+    };
+
+    this.commonSer.addTask(payload).subscribe((res) => {
+      this.ELEMENT_DATA = [res, ...this.ELEMENT_DATA];
+    });
+    this.inputField = "";
+  }
+
+  // Delete() is used for delete button
+  delete(i: number, id: number) {
+    // We are using splice() to delete data from an array
+    this.ELEMENT_DATA.splice(i, 1);
+
+    // Here Deleting data from api
+    this.commonSer.deleteItem(id).subscribe((res) => {});
+  }
 }

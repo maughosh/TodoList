@@ -1,67 +1,73 @@
-.main{
-    height:100%;
-    width: auto;   
+.main {
+  height: 100%;
+  width: auto;
 }
 
-.tool{
-   background-color:rgba(52,71,76,255);
+.tool {
+  background-color: rgba(52, 71, 76, 255);
 }
 
-.tool-heading{
-    border:1px solid black;
-    border-radius: 5px;
-    background-color: rgba(65,114,126,255); 
-    padding: 5px;
-    color: white;
-    width: 100%;
-    text-align: center;
+.tool-heading {
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: rgba(65, 114, 126, 255);
+  padding: 5px;
+  color: white;
+  width: 100%;
+  text-align: center;
 }
 
-.create{
-    font-weight: bold;
+.create {
+  font-weight: bold;
 }
 
-.bodyarea{
-    padding: 3%;
-    background-color: rgba(63, 58, 54, 255);
-    height:100%;
-    width:auto;
+.bodyarea {
+  padding: 3%;
+  background-color: rgba(63, 58, 54, 255);
+  width: auto;
+}
+
+input {
+  padding: 1.5%;
+  background-color: rgba(50,48, 46, 255);
+  border: rgba(50,48, 46, 255);
+  outline: none;
+  width: 88%;
+  color: white;
+  font-size: 15px;
+}
+
+::placeholder {
+  color: white;
+  font-size: 20px;
+}
+
+button {
+  padding: 1% 3% 1.5% 3%;
+  font-size: 21px;
+  background-color: rgba(65, 114, 126, 255);
+  border: 1px;
+  color: white;
+}
+
+table {
+  width: 100%;
+  background-color: rgba(63, 58, 54, 255);
+  border-collapse: collapse;
+  margin-top: 3%;
 }
   
-  input{
-      padding: 1.5%;
-      background-color: rgba(50,48, 46, 255); 
-      border: 3px solid black;
-      outline: none;
-      width: 88%;
-      color: white;
-      font-size: 15px;
-  }
-  input[type=text]:focus{
-    border: 3px solid black;
-  }
-  ::placeholder{
-    color: white;
-    font-size: 20px;
-  }
+tr{
+    border-bottom: 1px solid rgb(168, 166, 166);
+ }
 
-  button{
-    padding: 1% 3% 1.5% 3%;
-    font-size: 21px;
-    background-color: rgba(65,114,126,255);
-    border: 1px;
-    color: white;
-  }
+td {
+  color: white;
+  border-bottom: 1px solid white;
+  padding: 1%;
+}
 
-  table {
-    width: 100%;
-    background-color: rgba(63, 58, 54, 255);
-  }
- 
-  td{
-    color: white; 
-    border-bottom: 1px solid white;
-  }
-  mat-icon{
-      float: right;
-  }
+mat-icon {
+  float: right;
+  cursor: pointer;
+}
